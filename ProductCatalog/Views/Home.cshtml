@@ -1,0 +1,31 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.Home>
+@using ContentModels = Umbraco.Web.PublishedModels;
+@{
+	Layout = "master.cshtml";
+    //get all categories
+    var categories = Model.Descendants<Category>();
+    var units = Model.Descendants<Unit>();
+    var products = Model.Descendants<Product>();
+}
+    <h2>@Model.Title</h2>
+<h3>Categories</h3>
+@foreach(var category in categories)
+{
+    <div>@category.Title</div>
+}
+<h3>Units</h3>
+@foreach(var unit in units)
+{
+    <div>@unit.Name</div>
+}
+<h3>Products</h3>
+@foreach(var product in products)
+{
+<div>
+    @product.Title<br />
+    @foreach(var cat in product.Category)
+    {
+        <span>@cat.Value("title") </span>
+    }
+</div>
+}
